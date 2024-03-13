@@ -1,32 +1,34 @@
-SOURCES = server.c client.c
-OBJECTS = $(SOURCES:.c=.o)
+# BINARY
+NAME =
+CLIENT = client 
+SERVER = server 
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# ft_printf variables
+LIBFTPRINTF = ft_printf/libftprintf.a
+FT_PRINTFDIR = ft_printf
 
-all: server client
+# minitalk variables
 
-bonus: server client
+SRC_C = ft_client.c
+SRC_S = ft_server.c 
+OBS_C = ft_client.o
+OBS_S = ft_server.o 
+INC = ft_minital.h
 
-server: server.o libft
-	$(CC) -o $@ $< -Llibft -lft
+# compiling variables
 
-client: client.o libft
-	$(CC) -o $@ $< -Llibft -lft
+CC =	gcc
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -rf
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) $?
+# colors
+GREEN		=	\e[38;5;118m]
+YELLOW		=	\e[38;5;226m]
+RESET		=	\e[0m]
+_SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
+_INFO		=	[$(YELLOW)INFO$(RESET)]
 
-libft:
-	make -C libft
+all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
-clean:
-	rm -f $(OBJECTS)
-	make -C libft clean
-	
-fclean: clean
-	rm -f server client libft/libft.a
-
-re: fclean all
-
-.PHONY: all bonus libft clean fclean re
+$(SERVER): $(OBS_S) $(INC)
+	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@
