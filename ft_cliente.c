@@ -1,19 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_cliente.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbaddrul <hbaddrul@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: bbotelho <bbotelho@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/08 17:58:19 by hbaddrul          #+#    #+#             */
-/*   Updated: 2021/11/24 16:06:30 by hbaddrul         ###   ########.fr       */
+/*   Created: 2024/03/13 17:21:44 by bbotelho          #+#    #+#             */
+/*   Updated: 2024/03/13 17:21:48 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "libft/libft.h"
 
 static void	action(int sig)
 {

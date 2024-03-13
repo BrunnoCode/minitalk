@@ -15,7 +15,7 @@ SRC_C = ft_client.c
 SRC_S = ft_server.c 
 OBS_C = ft_client.o
 OBS_S = ft_server.o 
-INC = ft_minital.h
+INC = ft_minitalk.h
 
 # compiling variables
 
@@ -30,7 +30,7 @@ RESET		=	\e[0m]
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
-all: $(LIBFTPRINTF) $(LIBFT) $(CLIENT) $(SERVER)
+all: $(LIBFT) $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
 $(SERVER): $(OBS_S) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_S)
@@ -40,7 +40,7 @@ $(CLIENT): $(OBS_C) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_C)
 	@printf "$(_SUCCESS) client ready.\n"
 
-%.o %.c
+%.o: %.c
 	@ $(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
@@ -60,4 +60,6 @@ fclean: clean
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"
 
-re:
+re: fclean all
+
+.PHONY: all clean fclean re

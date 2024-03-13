@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_server.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbaddrul <hbaddrul@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: bbotelho <bbotelho@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/08 12:20:54 by hbaddrul          #+#    #+#             */
-/*   Updated: 2021/11/24 16:06:35 by hbaddrul         ###   ########.fr       */
+/*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
+/*   Updated: 2024/03/13 17:21:39 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <unistd.h>
-#include "libft/libft.h"
+
+
 
 static void	action(int sig, siginfo_t *info, void *context)
 {

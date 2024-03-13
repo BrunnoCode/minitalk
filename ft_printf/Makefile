@@ -17,13 +17,13 @@ $(NAME): $(OBJS)
 		ranlib $(NAME)
 		
 %.o: %.c $(INCL) Makefile
-		$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		rm -f $(OBJS)
+		rm -rf $(OBJS)
 
 fclean: clean
-		rm -f $(NAME)
+		rm -rf $(NAME)
 
 re: fclean all
 
