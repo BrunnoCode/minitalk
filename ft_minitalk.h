@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minitalk.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbotelho <bbotelho@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:33 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/13 17:28:53 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:00:48 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,5 @@
 #include <unistd.h>
 #include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
+
+#endif
