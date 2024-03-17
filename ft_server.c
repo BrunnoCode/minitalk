@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/14 18:48:58 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:25:34 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 void	handler_sig(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("SIGUSR1 RECEBIDO\n");
-	if (sig == SIGUSR2)
-		ft_printf("SIGUSR2\n");
-	ft_printf("RECEBIDO sinal: %d\n", sig);
-}
+		ft_printf("1");
+	else if (sig == SIGUSR2)
+	  ft_printf("0");		
+}	
 
 int	main(void)
 {
@@ -44,5 +43,7 @@ int	main(void)
 		ft_printf("Signal Error!\n");
 		exit(1);
 	}
+		sigaction(SIGUSR1, &sa, NULL);
+		sigaction(SIGUSR2, &sa, NULL);
 	while (1);
 }

@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cliente.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 17:21:44 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/17 19:40:18 by bbotelho         ###   ########.fr       */
+/*   Created: 2024/03/17 16:10:30 by bbotelho          #+#    #+#             */
+/*   Updated: 2024/03/17 18:02:48 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-int	main(int ac, char **av)
+int main()
 {
-	if (ac == 3)
-	{
-		pid_t servpid;
-		char *str;
-		int len;
-		int i;
-		servpid = ft_atoi(av[1]);
-		//str = av[2];
-		//len = ft_strlen(str);
-		i = 31;
-		while (i >= 0)
-		{
-			if (((len >> i) & 1) == 1)
-				kill(servpid, SIGUSR1);
-			else
-				kill(servpid, SIGUSR2);
-			i--;
-		}
-	}
-	return (0);
+ // int num = 0;
+  int sig = 5;
+  int i = 7;
+  while (i >= 0)
+  {
+    ft_printf("%d", (sig >> i) & 1);
+   i--;  
+  }
+ // ft_printf("%d", num);
+  return (0);
 }
