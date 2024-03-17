@@ -50,12 +50,14 @@ $(LIBFTPRINTF):
 	@$(MAKE) -C $(FT_PRINTFDIR)
 
 clean:
-	@ $(MAKE) clean -C $(LIBFTDIR) $(FT_PRINTFDIR)
+	@ $(MAKE) clean -C $(LIBFTDIR) 
+	@ $(MAKE) clean -C $(FT_PRINTFDIR)
 	@ $(RM) $(OBS_S) $(OBS_C)
 	@printf "$(_INFO) ...objects files removed.\n"
 
 fclean: clean
-	@ $(MAKE) fclean -C $(LIBFTDIR) $(FT_PRINTFDIR)
+	@ $(MAKE) fclean -C $(LIBFTDIR) 
+	@ $(MAKE) fclean -C $(FT_PRINTFDIR)
 	@ $(RM) $(CLIENT) $(SERVER)
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"
