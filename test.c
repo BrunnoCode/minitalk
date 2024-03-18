@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:10:30 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/17 18:02:48 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:12:49 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,5 @@
 
 int main()
 {
- // int num = 0;
-  int sig = 5;
-  int i = 7;
-  while (i >= 0)
-  {
-    ft_printf("%d", (sig >> i) & 1);
-   i--;  
-  }
- // ft_printf("%d", num);
-  return (0);
+    return (0);
 }

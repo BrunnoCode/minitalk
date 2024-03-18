@@ -6,32 +6,36 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/17 20:41:43 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:12:51 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
+typedef struct t_m
+{
+	unsigned char byte = 0;
+	unsigned int  index = 0;
+	char *str = NULL;
+	
+}	st;
+
 void	handler_sig(int sig)
 {
-	static unsigned char c = 0;
-	static int bit = 7;
-	if (sig == SIGUSR1)
-		  c = (c >> bit) & 1;
-	bit--;
-	if (bit == 0)
+	
+	if (sig == SIGINT)
 	{
-		ft_printf("%c", c);
-		c = 0;
-		bit = 0;
+		ft_printf("\033[91mFinishing Server...\033[0m\n");
+		sleep(1);
+		ft_printf("\033[32mServer Finished success!\033[0m\n");
+		exit(1);
 	}
-			
 }	
 
 int	main(void)
 {
 	struct sigaction sa;
-	sa.__sigaction_u.__sa_handler = handler_sig;
+	sa.sa_handler = handler_sig;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
   
@@ -43,16 +47,15 @@ int	main(void)
 		ft_printf("ERROR: fail to get pid process.\n");
 		exit(1);
 	}
-	ft_printf("Server ready: ok\n");
-	sleep(1);
-	ft_printf("PID Server Information: %i\n", spid);
+	ft_printf("\033[32mServer ready: ok\033[0m\n");
+ 	sleep(1);
+	ft_printf("\033[33mServer Information PID:\033[0m %d\n", spid);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1 || sigaction(SIGUSR2, &sa, NULL) == -1)
 	{
-		ft_printf("Signal Error!\n");
+		ft_printf("\033[91mError: Signal.\033[0m\n");
 		exit(1);
 	}
-		sigaction(SIGUSR1, &sa, NULL);
-		sigaction(SIGUSR2, &sa, NULL);
+	sigaction(SIGINT, &sa, NULL);
 	while (1)
 		pause();
 }
