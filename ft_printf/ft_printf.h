@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minitalk.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbotelho <bbotelho@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 17:21:33 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/24 10:54:30 by bbotelho         ###   ########.fr       */
+/*   Created: 2023/10/25 08:10:00 by bbotelho          #+#    #+#             */
+/*   Updated: 2023/10/26 17:21:29 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINITALK_H
-# define FT_MINITALK_H
+#ifndef FT_PRINTF_H
 
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
+# define FT_PRINTF_H
+
+# include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+int	ft_printf(char const *format, ...);
 
 #endif

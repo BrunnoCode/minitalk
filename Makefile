@@ -1,8 +1,11 @@
 # BINARY
+NAME =
 CLIENT = client 
 SERVER = server 
 
-# libft variables
+# ft_printf y libft variables
+LIBFTPRINTF = ft_printf/libftprintf.a
+FT_PRINTFDIR = ft_printf
 LIBFT = libft/libft.a
 LIBFTDIR = libft
 
@@ -27,29 +30,34 @@ RESET		=	\e[0m]
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
-all: $(LIBFT) $(CLIENT) $(SERVER)
+all: $(LIBFT) $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
 $(SERVER): $(OBS_S) $(INC)
-	@ $(CC) $(CFLAGS) $(LIBFT) -o $@ $(OBS_S)
+	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_S)
 	@printf "$(_SUCCESS) server ready.\n"
 
 $(CLIENT): $(OBS_C) $(INC)
-	@ $(CC) $(CFLAGS) $(LIBFT) -o $@ $(OBS_C)
+	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_C)
 	@printf "$(_SUCCESS) client ready.\n"
 
 %.o: %.c
 	@ $(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBFTDIR)
+	@$(MAKE) -C $(LIBFTDIR) --no-print-directory
+
+$(LIBFTPRINTF):
+	@$(MAKE) -C $(FT_PRINTFDIR) --no-print-directory
 
 clean:
-	@ $(MAKE) clean -C $(LIBFTDIR) 
+	@ $(MAKE) clean -C $(LIBFTDIR) --no-print-directory
+	@ $(MAKE) clean -C $(FT_PRINTFDIR) --no-print-directory
 	@ $(RM) $(OBS_S) $(OBS_C)
 	@printf "$(_INFO) ...objects files removed.\n"
 
 fclean: clean
-	@ $(MAKE) fclean -C $(LIBFTDIR) 
+	@ $(MAKE) fclean -C $(LIBFTDIR) --no-print-directory
+	@ $(MAKE) fclean -C $(FT_PRINTFDIR) --no-print-directory
 	@ $(RM) $(CLIENT) $(SERVER)
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"
@@ -57,3 +65,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+.SILENT: 

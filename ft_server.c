@@ -6,21 +6,19 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/24 10:04:24 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:51:37 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-void	handler_sig(int sig)
+ void	handler_sig(int sig)
 {
-	static	char byte = 0;
-	static int bit = 8;
+// 	static	char byte = 0;
+// 	static int bit = 8;
 	
-	if (sig == SIGUSR1)
-	{
-				
-	}
+// 	if (sig == SIGUSR1)
+// 	{			
 	
 	if (sig == SIGINT)
 	{
@@ -29,8 +27,8 @@ void	handler_sig(int sig)
 		ft_printf("\033[32mServer Finished success!\033[0m\n");
 		exit(1);
 	}
-}	
-
+}
+	
 int	main(void)
 {
 	struct sigaction sa;
