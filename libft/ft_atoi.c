@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbotelho <bbotelho@student.42barcel>       +#+  +:+       +#+        */
+/*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:33:51 by bbotelho          #+#    #+#             */
-/*   Updated: 2023/09/29 22:10:27 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:07:06 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,3 @@ int	ft_atoi(const char *str)
 	}
 	return ((int)signal * num);
 }
-/*
-#include <stdlib.h>
-
-int	main(void)
-{
-	const char	*str;
-
-	str = "-43-5";
-	printf("Resultado mi funcion: %d\n", ft_atoi(str));
-	printf("funcion original: %d\n", atoi(str));
-	return (0);
-}*/
