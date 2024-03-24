@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/24 12:10:18 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:28:03 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,20 @@
 
 void	handler_sig(int sig)
 {
-	
+	unsigned char	c;
+	int				bits;
+
+	c = 0;
+	bits = 0;
+	if (sig == SIGUSR1)
+		c | = 1 << bits;
+	bits++;
+	if (bits == 8)
+	{
+		ft_putchar_fd(c, 1);
+		c = 0;
+		bits = 0;
+	}
 }
 
 int	main(void)
