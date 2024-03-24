@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/24 16:41:46 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/24 16:57:23 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,10 @@ static void	ft_kill(int pid, char *str)
 		}
 		i++;
 	}
-	c = '\0';
-	bits = 0;
-	c = str[i];
-	while (bits != 8)
+	while (bits-- != 0)
 	{
-		if (c >> bits & 1)
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
+		kill(pid, SIGUSR2);
 		usleep(100);
-		bits++;
 	}
 }
 
