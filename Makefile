@@ -1,5 +1,4 @@
 # BINARY
-NAME =
 CLIENT = client 
 SERVER = server 
 
@@ -25,23 +24,23 @@ RM = rm -rf
 
 # colors
 GREEN		=	\e[38;5;118m]
-YELLOW		=	\e[38;5;226m]
+YELLOW		=	\e[38;5;226m
 RESET		=	\e[0m]
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
-_INFO		=	[$(YELLOW)INFO$(RESET)]
+_INFO		=	[$(YELLOW)INFO$(RESET)
 
 all: $(LIBFT) $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
 $(SERVER): $(OBS_S) $(INC)
-	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_S)
+	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_S) --silent
 	@printf "$(_SUCCESS) server ready.\n"
 
 $(CLIENT): $(OBS_C) $(INC)
-	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_C)
+	@ $(CC) $(CFLAGS) $(LIBFT) $(LIBFTPRINTF) -o $@ $(OBS_C) --silent
 	@printf "$(_SUCCESS) client ready.\n"
 
 %.o: %.c
-	@ $(CC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(CFLAGS) -c $< -o $@ --silent
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFTDIR) --no-print-directory
@@ -50,19 +49,18 @@ $(LIBFTPRINTF):
 	@$(MAKE) -C $(FT_PRINTFDIR) --no-print-directory
 
 clean:
-	@ $(MAKE) clean -C $(LIBFTDIR) --no-print-directory
-	@ $(MAKE) clean -C $(FT_PRINTFDIR) --no-print-directory
-	@ $(RM) $(OBS_S) $(OBS_C)
+	@ $(MAKE) clean -C $(LIBFTDIR) --no-print-directory --silent
+	@ $(MAKE) clean -C $(FT_PRINTFDIR) --no-print-directory --silent
+	@ $(RM) $(OBS_S) $(OBS_C) --silent
 	@printf "$(_INFO) ...objects files removed.\n"
 
 fclean: clean
-	@ $(MAKE) fclean -C $(LIBFTDIR) --no-print-directory
-	@ $(MAKE) fclean -C $(FT_PRINTFDIR) --no-print-directory
-	@ $(RM) $(CLIENT) $(SERVER)
+	@ $(MAKE) fclean -C $(LIBFTDIR) --no-print-directory --silent
+	@ $(MAKE) fclean -C $(FT_PRINTFDIR) --no-print-directory --silent
+	@ $(RM) $(CLIENT) $(SERVER) --silent
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"
 
 re: fclean all
 
 .PHONY: all clean fclean re
-.SILENT: 

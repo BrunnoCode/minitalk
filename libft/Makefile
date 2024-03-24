@@ -17,7 +17,7 @@ $(NAME): $(OBJS)
 	ranlib $(NAME)
 
 %.o: %.c $(INCL) Makefile
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean: 
 	rm -rf $(OBJS)
