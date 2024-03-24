@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/24 16:02:34 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/24 16:42:35 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	handler_sig(int sig)
 	bit++;
 	if (bit == 8)
 	{
-		ft_printf("%c", i);
+		if (i)
+			ft_printf("%c", i);
+		else
+			ft_printf("\n");
 		bit = 0;
 		i = 0;
 	}
