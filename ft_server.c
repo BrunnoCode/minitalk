@@ -6,22 +6,21 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/18 16:12:51 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:04:24 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-typedef struct t_m
-{
-	unsigned char byte = 0;
-	unsigned int  index = 0;
-	char *str = NULL;
-	
-}	st;
-
 void	handler_sig(int sig)
 {
+	static	char byte = 0;
+	static int bit = 8;
+	
+	if (sig == SIGUSR1)
+	{
+				
+	}
 	
 	if (sig == SIGINT)
 	{
