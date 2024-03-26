@@ -6,7 +6,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = ft_atoi.c
+SRCS = ft_atoi.c ft_printf.c
 
 OBJS = $(SRCS:.c=.o)
 

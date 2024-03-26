@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/24 16:42:35 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:17:35 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handler_sig(int sig)
 	static int	i;
 
 	if (sig == SIGUSR1)
-		i |= (0x01 << bit);
+		i |= (1 << bit);
 	bit++;
 	if (bit == 8)
 	{
@@ -41,13 +41,13 @@ int	main(void)
 		ft_printf("\033[91mERROR: fail to get pid process.\033[0m\n");
 		exit(1);
 	}
-	ft_printf("\033[32mServer ready: ok\033[0m\n");
-	sleep(1);
 	ft_printf("\033[33mServer Information PID:\033[0m %d\n", spid);
+	sleep(1);
+	ft_printf("\033[32mServer waiting for signals...\033[0m\n");
 	while (1)
 	{
 		signal(SIGUSR1, handler_sig);
 		signal(SIGUSR2, handler_sig);
-		pause();
+		usleep(30);
 	}
 }

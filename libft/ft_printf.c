@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbotelho <bbotelho@student.42barcel>       +#+  +:+       +#+        */
+/*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 13:41:28 by bbotelho          #+#    #+#             */
-/*   Updated: 2023/10/26 14:00:13 by bbotelho         ###   ########.fr       */
+/*   Created: 2024/03/26 15:28:23 by bbotelho          #+#    #+#             */
+/*   Updated: 2024/03/26 15:49:58 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putchr(int c, int *datap)
+static void	ft_putchr(int c, int *datap)
 {
 	if (*datap != -1)
 	{
@@ -23,7 +23,7 @@ void	ft_putchr(int c, int *datap)
 	}
 }
 
-void	ft_str(char *str, int *datap)
+static void	ft_str(char *str, int *datap)
 {
 	if (!str)
 		ft_str("(null)", datap);
@@ -37,7 +37,7 @@ void	ft_str(char *str, int *datap)
 	}
 }
 
-void	ft_number(unsigned long n, int *datap, unsigned long base,
+static void	ft_number(unsigned long n, int *datap, unsigned long base,
 		char *basestr)
 {
 	if ((int)n < 0 && basestr[10] == '\0')
@@ -52,7 +52,7 @@ void	ft_number(unsigned long n, int *datap, unsigned long base,
 	ft_putchr(basestr[n % base], datap);
 }
 
-void	ft_formats(const char *formato, va_list ap, int *datap)
+static void	ft_formats(const char *formato, va_list ap, int *datap)
 {
 	if (*formato == '%')
 		ft_putchr('%', datap);
