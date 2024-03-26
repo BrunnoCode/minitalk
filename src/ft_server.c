@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/26 15:17:35 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/03/26 19:07:51 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,15 @@ void	handler_sig(int sig)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	pid_t	spid;
 
+	if (ac != 1 && av[1])
+	{
+		ft_printf("\033[91mError! type only:\033[0m ./server\n");
+		exit(EXIT_FAILURE);
+	}
 	spid = getpid();
 	if (spid == -1)
 	{
