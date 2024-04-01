@@ -6,11 +6,28 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/03/26 15:22:22 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/01 21:17:44 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
+
+static void	first_len(int pid, int len)
+{
+	int	bits;
+	bits = 0;
+	ft_printf("valor len client %d\n", len);
+	while (bits < 32)
+	{
+		if ((len >> bits) & 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		bits++;
+		usleep(100);
+	}
+	ft_printf("valor de bits %d\n", bits);
+}
 
 static void	ft_kill(int pid, int c)
 {
@@ -32,7 +49,6 @@ int	main(int ac, char **av)
 {
 	char	*s;
 	int		spid;
-	int		finish;
 
 	if (ac != 3)
 	{
@@ -42,16 +58,11 @@ int	main(int ac, char **av)
 	}
 	s = av[2];
 	spid = ft_atoi(av[1]);
+	first_len(spid, ft_strlen(s));
 	while (av[2] && *s)
 	{
 		ft_kill(spid, *s);
 		s++;
-	}
-	finish = 7;
-	while (finish-- >= 0)
-	{
-		kill(spid, SIGUSR2);
-		usleep(100);
 	}
 	return (0);
 }

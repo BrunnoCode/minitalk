@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minitalk.h                                      :+:      :+:    :+:   */
+/*   error_control.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 17:21:33 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/01 20:04:26 by bbotelho         ###   ########.fr       */
+/*   Created: 2024/04/01 18:20:04 by bbotelho          #+#    #+#             */
+/*   Updated: 2024/04/01 18:27:47 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINITALK_H
-# define FT_MINITALK_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-# include <stddef.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h> // to debugging
-
-#endif
+void	error_control()
+{
+	ft_printf("\033[91mERROR:\033[0m malloc fail.\n");
+	exit(EXIT_FAILURE);
+}

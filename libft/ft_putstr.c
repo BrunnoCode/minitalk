@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minitalk.h                                      :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 17:21:33 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/01 20:04:26 by bbotelho         ###   ########.fr       */
+/*   Created: 2024/04/01 17:02:11 by bbotelho          #+#    #+#             */
+/*   Updated: 2024/04/01 19:19:56 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINITALK_H
-# define FT_MINITALK_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include <signal.h>
-# include <stddef.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h> // to debugging
+void	ft_putstr(char *s)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (s[i])
+		write(1, &s[i++], 1);
+	write(1, "\n", 1);
+}
