@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/03 20:59:39 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:00:40 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	handler_sig(int sig)
 			str.bits--;
 			if (str.bits == 0 && str.flag == 1)
 			{
-				printf("caracter montado -> %c\n flag %d\n", str.byte, str.flag);//debugging
+				printf("caracter montado -> %c flag %d\n", str.byte, str.flag);//debugging
 				str.s[str.i++] = str.byte;
 				str.bits = 8;
 				str.byte = 0;
