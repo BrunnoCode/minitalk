@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/03 19:11:37 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:39:14 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ static void	first_len(int pid, int len)
 	while (bits < 32)
 	{
 		if ((len >> bits) & 1)
+		{
 			kill(pid, SIGUSR1);
+			usleep(100);
+		}
 		else
+		{
 			kill(pid, SIGUSR2);
+			usleep(100);
+		}
 		bits++;
-		usleep(300);
 	}
 	finish_len = 1;
 	ft_printf("valor de bits %d\n", bits);

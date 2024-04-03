@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 19:26:26 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/03 17:36:25 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:09:53 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,30 @@ int	main(void)
 	s2 = "World";
 	printf("Resultado: '%s'\n memoria s1: '%p' \n memoria s2 '%p' \n", ft_strjoin(s1, s2), s1, s2);
 	return (0);
+}
+
+
+static void	ft_addstr(int sig)
+{
+	static int	i;
+
+	i = 0;
+	if ((sig == SIGUSR1 || sig == SIGUSR2) && str.bits > 0)
+	{
+		if (sig == SIGUSR1)
+			str.byte |= (1 << str.bits);
+		--str.bits;
+	}
+	if (str.bits == 0 && str.flag == 1)
+	{
+		str.s[i++] = str.byte;
+		str.byte = 0;
+		str.bits = 8;
+	}
+	if (str.s[i] == '\0')
+	{
+		ft_printf("%s", str.s);
+		i = 0;
+		str.flag = 0;
+	}
 }

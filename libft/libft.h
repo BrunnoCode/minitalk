@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:59:15 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/03 19:02:45 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:50:00 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_str
 {
 	char			*s;
 	unsigned char	byte;
+	int				i;
 	int				len;
 	int				bitlen;
 	int				bits;
