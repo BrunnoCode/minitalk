@@ -6,61 +6,82 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/01 21:21:21 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:58:38 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-static int	flag = 0;
-static int	len = 0;
+static void ft_mem_alloc(char **s, int length, int *flag)
+{
+	if (!*s && length)
+	{
+		*s = malloc(sizeof(char) * (length + 1));
+		(*flag) = 1;
+	}
+}
 
-static void	ft_addstr(char **s, int sig, int length)
+static int	ft_addstr(char **s, int sig, int length, int flag)
 {
 	static unsigned char byte = 0;
-	static int bits = 7;
+	static int bits = 8;
 	static int i = 0;
-  printf("valor de len %d\n", length); // debugguing
-	if (sig == SIGUSR1 && flag == 1)
+  printf("\nfunciona bits ? %d\n", bits); // debugguing
+	if (sig == SIGUSR1 && flag == 1 && bits >= 0)
 		byte |= (1 << bits);
-	bits--;
-	if (bits <= 0 && flag == 1)
+	if (bits-- == 0 && flag == 1)
 	{
+  	printf("consegui un caracter %c\n", byte); // debugguing
 		(*s)[i++] = byte;
+  	printf("\nposicion de str[i] -> %d caracter añadido en str[i] = %c\n", i, *s[i]); // debugguing
 		byte = 0;
-		bits = 7;
+		bits = 8;
 	}
 	if (i == length)
 	{
 		(*s)[i] = '\0';
 		ft_putstr(*s);
-		i = 0;
-		flag = 0;
-		len = 0;
-		free(*s);
+		return (0);
 	}
+  printf("valor de flag %d\n", flag); // debugguing
+	return (1);
 }
+
+static int ft_reset(char **s, int *resetbits)
+{
+	(*resetbits) = 0;
+	if (*s)
+	{
+		free(*s);
+		(*s) = NULL;
+	}
+	return (0);
+}
+
 void	handler_sig(int sig)
 {
-	static int	bits = 32;
-	int length;
-	char		*str;
+  static int flag = 0;
+	static int	bits = 0;
+	static int length = 0;
+	static char		*str = NULL;
 
-	if (sig == SIGUSR1 && flag == 0 && bits > 0)
-			len |= (1 << bits);
-	bits--;
-	if (bits == 0 && len != 0)
+	if (flag == 0 && bits <= 31)
 	{
-	  printf("valor len: %d\n", len); // debugging
-		length = len;
-		flag = 1;
-		str = malloc(sizeof(char) * (length + 1));
+		if (sig == SIGUSR1 && flag == 0)
+			length |= (1 << bits);
+		bits++;
+	}
+	if (bits == 32)
+	{
+	  printf("valor length: %d\n", length); // debugging
+		ft_mem_alloc(&str, length, &flag);
 		if (!str)
 			error_control();
-		bits = 0;
-		if (sig == SIGUSR1 || sig == SIGUSR2)
-			ft_addstr(&str, sig, length);
-		printf("valor de len depois da str: %d\n", len); // debugging
+		if ((sig == SIGUSR1 || sig == SIGUSR2) && flag == 1)
+			flag = ft_addstr(&str, sig, length, flag);
+		if (flag == 0)
+			length = ft_reset(&str, &bits);
+		printf("valor de len depois da str: %d\n", length); // debugging
 	}
 }
 

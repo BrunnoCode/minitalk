@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/01 21:17:44 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:57:02 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ static void	ft_kill(int pid, int c)
 {
 	int	bits;
 
-	bits = 0;
-	while (bits <= 7)
+	bits = 7;
+	while (bits >= 0)
 	{
 		if ((c >> bits) & 1)
-			kill(pid, SIGUSR1);
+			kill(pid, SIGUSR1), write(1, "1", 1); //debugging
 		else
-			kill(pid, SIGUSR2);
-		usleep(50);
-		bits++;
+			kill(pid, SIGUSR2), write(1, "0", 1); //debugging
+ 		usleep(300);
+		bits--;
 	}
 }
 
