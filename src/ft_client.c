@@ -6,13 +6,11 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/04 12:12:29 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:40:27 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
-
-int finish_len;
 
 static void	first_len(int pid, int len)
 {
@@ -22,18 +20,12 @@ static void	first_len(int pid, int len)
 	while (bits < 32)
 	{
 		if ((len >> bits) & 1)
-		{
 			kill(pid, SIGUSR1);
-			usleep(100);
-		}
 		else
-		{
 			kill(pid, SIGUSR2);
-			usleep(100);
-		}
 		bits++;
+		usleep(100);
 	}
-	finish_len = 1;
 	ft_printf("valor de bits %d\n", bits);
 }
 
@@ -41,15 +33,15 @@ static void	ft_kill(int pid, int c)
 {
 	int	bits;
 
-	bits = 7;
-	while (bits >= 0)
+	bits = 0;
+	while (bits < 8)
 	{
 		if ((c >> bits) & 1)
-			kill(pid, SIGUSR1), write(1, "1", 1); //debugging
+			kill(pid, SIGUSR1); //debugging
 		else
-			kill(pid, SIGUSR2), write(1, "0", 1); //debugging
-		bits--;
- 		usleep(300);
+			kill(pid, SIGUSR2); //debugging
+		bits++;
+ 		usleep(100);
 	}
 }
 
@@ -68,11 +60,10 @@ int	main(int ac, char **av)
 	spid = ft_atoi(av[1]);
 	first_len(spid, ft_strlen(s));
 	usleep(300);
-	while (av[2] && *s && finish_len)
+	while (av[2] && *s)
 	{
 		ft_kill(spid, *s);
 		s++;
 	}
-	finish_len = 0;
 	return (0);
 }
