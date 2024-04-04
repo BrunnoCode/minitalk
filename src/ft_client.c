@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/03 20:39:14 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:12:29 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int ac, char **av)
 	s = av[2];
 	spid = ft_atoi(av[1]);
 	first_len(spid, ft_strlen(s));
+	usleep(300);
 	while (av[2] && *s && finish_len)
 	{
 		ft_kill(spid, *s);
