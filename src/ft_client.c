@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/04 18:40:27 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/06 18:38:30 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	first_len(int pid, int len)
 {
 	int	bits;
 	bits = 0;
-	ft_printf("valor len client %d\n", len);
+	ft_printf("valor len client %d\n", len); //debugging
 	while (bits < 32)
 	{
 		if ((len >> bits) & 1)
@@ -26,7 +26,7 @@ static void	first_len(int pid, int len)
 		bits++;
 		usleep(100);
 	}
-	ft_printf("valor de bits %d\n", bits);
+	ft_printf("valor de bits %d\n", bits);//debugging
 }
 
 static void	ft_kill(int pid, int c)
