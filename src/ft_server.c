@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/04 19:34:28 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:38:41 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,33 @@
 
 t_str		g_str;
 
-static void	ft_struct_reset(int *i)
+static void	ft_struct_reset(void)
 {
-	 if (*g_str.s != NULL && (*i) == g_str.len)
+	 if (g_str.s != NULL)
 		free(g_str.s);
 	g_str.s = NULL;
 	g_str.len = 0;
 	g_str.bitlen = 0;
-	(*i) = 0;
+	g_str.i = 0;
 	g_str.flag = 0;
 }
 
 static void	ft_mem_alloc()
 {
+	if (g_str.flag == 1)
+	{
+		if (g_str.s)
+			free(g_str.s);
 		g_str.s = malloc(sizeof(char) * (g_str.len + 1));
-		g_str.s[g_str.len] = '\0';
-	  printf("valor de len allocado-> %d\n", g_str.len); //debugging
-	if (g_str.s == NULL)
+		if (g_str.s == NULL)
 			error_control();
+		g_str.s[g_str.len] = '\0';
+	}
 }
 
 
 void handler_sigstr(int sig)
 {
-  static int i = 0;
 	  if (g_str.flag == 1)
 		{
 				if (sig == SIGUSR1)
@@ -45,32 +48,42 @@ void handler_sigstr(int sig)
 				g_str.bits++;
 				if (g_str.bits == 8)
 				{
-					g_str.s[i] = g_str.byte;
+					g_str.s[g_str.i++] = g_str.byte;
 					g_str.bits = 0;
 					g_str.byte = 0;
 				}
-				if (g_str.s[i] == '\0')
-				{
-						i = 0;
-						while (g_str.s[i])
-							write(1, &g_str.s[i++], 1); //printf("  caracter escrito ->  %c\n", g_str.s[(*i)]);//debugging
-						write(1, "\n", 1);   
-						ft_struct_reset(&i);
-				}
+				if (g_str.i >= g_str.len)
+        {
+            g_str.i = 0;
+            while (g_str.s[g_str.i] != '\0' && g_str.i < g_str.len)
+                write(1, &g_str.s[g_str.i++], 1);
+            write(1, "\n", 1);
+            ft_struct_reset();
+        }
 		}
 }
 
 
 void handler_siglen(int sig)
 {
-		if (sig == SIGUSR1 && g_str.flag == 0)
+	if (g_str.flag == 0)
+	{
+			if (sig == SIGUSR1 && g_str.flag == 0)
 			g_str.len |= (1 << g_str.bitlen);
 		g_str.bitlen++;
+		if (g_str.bitlen == 32)
+		{
+			g_str.flag = 1;
+			ft_mem_alloc();
+		}
+	}
 }
 
 int	main(int ac, char **av)
 {
 	pid_t	spid;
+	
+	ft_struct_reset();
 
 	if (ac != 1 && av[1])
 	{
@@ -88,8 +101,11 @@ int	main(int ac, char **av)
 	ft_printf("\033[32mServer waiting for signals...\033[0m\n");
 	signal(SIGUSR1, handler_siglen);
 	signal(SIGUSR2, handler_siglen);
-	signal(SIGUSR1, handler_sigstr);
-	signal(SIGUSR2, handler_sigstr);
+	if (g_str.flag == 1)
+	{
+		signal(SIGUSR1, handler_sigstr);
+		signal(SIGUSR2, handler_sigstr);
+	}
 	while (1)
 		pause();
 }
