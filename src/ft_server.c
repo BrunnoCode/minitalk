@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/08 10:38:41 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:25:35 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_mem_alloc()
 			free(g_str.s);
 		g_str.s = malloc(sizeof(char) * (g_str.len + 1));
 		if (g_str.s == NULL)
-			error_control();
+			error_control(3);
 		g_str.s[g_str.len] = '\0';
 	}
 }
@@ -82,30 +82,30 @@ void handler_siglen(int sig)
 int	main(int ac, char **av)
 {
 	pid_t	spid;
-	
 	ft_struct_reset();
-
-	if (ac != 1 && av[1])
-	{
-		ft_printf("\033[91mError! type only:\033[0m ./server\n");
-		exit(EXIT_FAILURE);
-	}
+	
+	struct sigaction	sa_usr;
+	sigemptyset(&sa_usr.sa_mask);
+	sa_usr.sa_flags = 0;
+	
+	if (ac != 2 && av[1])
+		error_control(1);
 	spid = getpid();
-	if (spid == -1)
+	ft_put_info(spid);
+	while(1)
 	{
-		ft_printf("\033[91mERROR: fail to get pid process.\033[0m\n");
-		exit(1);
-	}
-	ft_printf("\033[33mServer Information PID:\033[0m %d\n", spid);
-	sleep(1);
-	ft_printf("\033[32mServer waiting for signals...\033[0m\n");
-	signal(SIGUSR1, handler_siglen);
-	signal(SIGUSR2, handler_siglen);
-	if (g_str.flag == 1)
-	{
-		signal(SIGUSR1, handler_sigstr);
-		signal(SIGUSR2, handler_sigstr);
-	}
-	while (1)
+		if (g_str.flag == 0)
+		{
+			sa_usr.__sigaction_u.__sa_handler = handler_siglen;
+			sigaction(SIGUSR1, &sa_usr, 0);
+			sigaction(SIGUSR2, &sa_usr, 0);
+		}
+		else if (g_str.flag == 1)
+		{
+				sa_usr.__sigaction_u.__sa_handler = handler_sigstr;
+				sigaction(SIGUSR1, &sa_usr, 0);
+				sigaction(SIGUSR2, &sa_usr, 0);
+		}
 		pause();
+	}
 }

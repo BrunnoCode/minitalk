@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_control.c                                    :+:      :+:    :+:   */
+/*   ft_put_info.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/01 18:20:04 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/08 14:43:54 by bbotelho         ###   ########.fr       */
+/*   Created: 2024/04/08 12:11:39 by bbotelho          #+#    #+#             */
+/*   Updated: 2024/04/08 12:13:02 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	error_control(int error)
+void  ft_put_info(pid_t spid)
 {
-	if (error == 1)
-		ft_printf(ERROR_ARGS);
-	else if (error == 2)
-		ft_printf(ERROR_PID);
-	else if (error == 3)
-		ft_printf(ERROR_MALLOC);
-	else if (error == 4)
-		ft_printf(CLIENT_ARGS_ERROR);
-	else if (error == 5)
-		ft_printf(CLIENT_ARGS_CONTROL);
-	exit(EXIT_FAILURE);
+  if (spid == -1)
+		error_control(2);
+	ft_printf(SERVER_INFO, spid);
+	ft_printf(SERVER_DONE);
 }
+  

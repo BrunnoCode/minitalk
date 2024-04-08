@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:43:27 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/06 18:38:30 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:22:51 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	first_len(int pid, int len)
 {
 	int	bits;
+
 	bits = 0;
-	ft_printf("valor len client %d\n", len); //debugging
 	while (bits < 32)
 	{
 		if ((len >> bits) & 1)
@@ -26,7 +26,6 @@ static void	first_len(int pid, int len)
 		bits++;
 		usleep(100);
 	}
-	ft_printf("valor de bits %d\n", bits);//debugging
 }
 
 static void	ft_kill(int pid, int c)
@@ -37,11 +36,11 @@ static void	ft_kill(int pid, int c)
 	while (bits < 8)
 	{
 		if ((c >> bits) & 1)
-			kill(pid, SIGUSR1); //debugging
+			kill(pid, SIGUSR1);
 		else
-			kill(pid, SIGUSR2); //debugging
+			kill(pid, SIGUSR2);
 		bits++;
- 		usleep(100);
+		usleep(100);
 	}
 }
 
@@ -50,20 +49,20 @@ int	main(int ac, char **av)
 	char	*s;
 	int		spid;
 
-	if (ac != 3)
+	if (ac == 3)
 	{
-		ft_printf("\033[91mARGS Error Try to use: \033[0m");
-		ft_printf("\033[33m./client <PID SERVER> <STRING>.\033[0m\n");
-		exit(1);
+		spid = ft_atoi(av[1]);
+		if (spid < 0)
+			error_control(4);
+		s = av[2];
+		first_len(spid, ft_strlen(s));
+		while (av[2] && *s)
+		{
+			ft_kill(spid, *s);
+			s++;
+		}
 	}
-	s = av[2];
-	spid = ft_atoi(av[1]);
-	first_len(spid, ft_strlen(s));
-	usleep(300);
-	while (av[2] && *s)
-	{
-		ft_kill(spid, *s);
-		s++;
-	}
+	else
+		error_control(5);
 	return (0);
 }

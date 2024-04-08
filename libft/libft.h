@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:59:15 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/08 10:41:36 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:52:01 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define LIBFT_H
 # include "../src/ft_minitalk.h"
 # include <stdarg.h>
+# include <unistd.h>
 
 typedef struct s_str
 {
@@ -27,11 +28,11 @@ typedef struct s_str
 	int				flag;
 }					t_str;
 
-
 int					ft_atoi(const char *str);
 int					ft_printf(char const *format, ...);
 int					ft_strlen(char *s);
 void				ft_putstr(char *s);
-void				error_control(void);
+void				error_control(int typeoferror);
+void				ft_put_info(pid_t spid);
 
 #endif
