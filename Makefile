@@ -10,7 +10,7 @@ S_SRC = src/ft_server.c
 OBJ_C = $(C_SRC:.c=.o)
 OBJ_S = $(S_SRC:.c=.o)
 
-CC = gcc -g -fsanitize=address 
+CC = gcc -g #-fsanitize=address 
 CFLAGS = -Wall -Werror -Wextra
 INC = -I src -I libft
 RM = rm -rf
