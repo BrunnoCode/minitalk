@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/08 18:11:23 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:26:05 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	main(int ac, char **av)
 	pid_t				spid;
 	struct sigaction	sa_usr;
 
-	ft_struct_reset(&sa_usr);
+	ft_struct_reset();
+	ft_init_struct(&sa_usr);
 	if (ac != 1 && av[1])
 		error_control(1);
 	spid = getpid();
