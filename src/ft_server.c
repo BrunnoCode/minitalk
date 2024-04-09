@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:21:38 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/08 18:26:05 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:12:55 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_str		g_str;
 
-static void	ft_struct_reset()
+static void	ft_struct_reset(void)
 {
 	if (g_str.s != NULL)
 		free(g_str.s);
@@ -22,7 +22,7 @@ static void	ft_struct_reset()
 	g_str.len = 0;
 	g_str.bitlen = 0;
 	g_str.i = 0;
-	g_str.flag = 0;	
+	g_str.flag = 0;
 }
 
 static void	ft_mem_alloc(void)

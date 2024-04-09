@@ -6,7 +6,7 @@
 /*   By: bbotelho <bbotelho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 18:07:45 by bbotelho          #+#    #+#             */
-/*   Updated: 2024/04/08 18:24:36 by bbotelho         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:02:39 by bbotelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,3 @@ void	ft_init_struct(struct sigaction *sa_usr)
 	sigemptyset(&(sa_usr->sa_mask));
 	sa_usr->sa_flags = 0;
 }
-
